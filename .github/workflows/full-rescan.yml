@@ -1,0 +1,41 @@
+name: Full Rescan (weekly drift check)
+
+on:
+  schedule:
+    - cron: '0 3 * * 0'   # Sunday 03:00 UTC
+  workflow_dispatch:         # manual trigger anytime
+
+jobs:
+  full-rescan:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: hints-update
+      cancel-in-progress: false
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.HINTS_PUSH_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run full rescan
+        run: node scripts/full-rescan.js
+        env:
+          RPC_URL: ${{ secrets.PULSECHAIN_RPC }}
+          RPC_URL_2: ${{ secrets.PULSECHAIN_RPC_2 }}
+
+      - name: Commit and push
+        run: |
+          git config user.email "pb-hints-bot@noreply.github.com"
+          git config user.name "PB Hints Bot"
+          git add hints-latest.json hints-latest.json.gz hints-cache.json
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "full-rescan $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push

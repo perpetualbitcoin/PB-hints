@@ -1,0 +1,16 @@
+{
+  "name": "pb-hints",
+  "version": "1.0.0",
+  "description": "Perpetual Bitcoin — hourly hint snapshots rebuilt directly from PulseChain. Independent backup, runs free on GitHub Actions forever.",
+  "private": true,
+  "scripts": {
+    "full-rescan": "node scripts/full-rescan.js",
+    "incremental": "node scripts/incremental-scan.js"
+  },
+  "dependencies": {
+    "ethers": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

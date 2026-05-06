@@ -1,0 +1,42 @@
+name: Update Hints (incremental)
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'   # every 30 minutes
+  workflow_dispatch:           # manual trigger anytime
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    # Prevent two runs overlapping if a run takes longer than 30 min
+    concurrency:
+      group: hints-update
+      cancel-in-progress: false
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.HINTS_PUSH_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run incremental scan
+        run: node scripts/incremental-scan.js
+        env:
+          RPC_URL: ${{ secrets.PULSECHAIN_RPC }}
+          RPC_URL_2: ${{ secrets.PULSECHAIN_RPC_2 }}
+
+      - name: Commit and push
+        run: |
+          git config user.email "pb-hints-bot@noreply.github.com"
+          git config user.name "PB Hints Bot"
+          git add hints-latest.json hints-latest.json.gz hints-cache.json
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "hints $(date -u +%Y-%m-%dT%H:%M:%SZ) [incremental]"
+          git push
