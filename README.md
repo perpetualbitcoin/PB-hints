@@ -20,7 +20,7 @@ Rebuilt directly from PulseChain, no server, no database required.
 Every 30 minutes, GitHub Actions runs `incremental-scan.js`:
 1. Loads `hints-cache.json` (previous state)
 2. Finds new PBts and any PBts touched by vault events since the last block
-3. Re-fetches only those — O(changed), not O(total)
+3. Re-fetches only those ,  O(changed), not O(total)
 4. Writes updated `hints-latest.json.gz` + `hints-cache.json`
 
 Every Sunday 03:00 UTC, `full-rescan.js` runs as a drift check:
@@ -30,12 +30,12 @@ Every Sunday 03:00 UTC, `full-rescan.js` runs as a drift check:
 ## Consuming the hints
 
 ```
-Primary:  https://raw.githubusercontent.com/PerpetualBitcoinDev/PB-hints/main/hints-latest.json.gz
-Mirror:   https://cdn.jsdelivr.net/gh/PerpetualBitcoinDev/PB-hints@main/hints-latest.json.gz
+Primary:  https://raw.githubusercontent.com/perpetualbitcoin/PB-hints/main/hints-latest.json.gz
+Mirror:   https://cdn.jsdelivr.net/gh/perpetualbitcoin/PB-hints@main/hints-latest.json.gz
 ```
 
 Decompress (gzip), parse as JSON. `rows` is already sorted by
-`nextTriggerPrice` ascending, pass directly to the vault as the netting
+`nextTriggerPrice` ascending ,  pass directly to the vault as the netting
 hint list.
 
 ## Community takeover
@@ -44,9 +44,9 @@ If this repo goes unmaintained:
 
 1. Fork the repo.
 2. Go to **Settings → Secrets → Actions** and add:
-   - `HINTS_PUSH_TOKEN` — a fine-grained GitHub PAT with write access to your fork.
-   - `PULSECHAIN_RPC` — any PulseChain RPC endpoint (e.g. `https://rpc.pulsechain.com`).
-   - `PULSECHAIN_RPC_2` — fallback RPC (optional, e.g. `https://pulsechain.publicnode.com`).
+   - `HINTS_PUSH_TOKEN` ,  a fine-grained GitHub PAT with write access to your fork.
+   - `PULSECHAIN_RPC` ,  any PulseChain RPC endpoint (e.g. `https://rpc.pulsechain.com`).
+   - `PULSECHAIN_RPC_2` ,  fallback RPC (optional, e.g. `https://pulsechain.publicnode.com`).
 3. Go to **Actions** and re-enable workflows.
 4. Manually trigger **Full Rescan** once to seed the cache.
 5. Update the `dataUrl` and `mirrorUrl` in `scripts/shared.js` to point to your fork.
