@@ -2,7 +2,7 @@
 
 Auto-updated hint snapshots for the **Perpetual Bitcoin** netting contract.
 
-Rebuilt directly from PulseChain — no server, no database required.
+Rebuilt directly from PulseChain, no server, no database required.
 
 ## What's in this repo
 
@@ -35,7 +35,7 @@ Mirror:   https://cdn.jsdelivr.net/gh/PerpetualBitcoinDev/PB-hints@main/hints-la
 ```
 
 Decompress (gzip), parse as JSON. `rows` is already sorted by
-`nextTriggerPrice` ascending — pass directly to the vault as the netting
+`nextTriggerPrice` ascending, pass directly to the vault as the netting
 hint list.
 
 ## Community takeover
