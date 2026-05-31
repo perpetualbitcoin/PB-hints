@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generatedAt": "2026-05-31T06:48:15.637Z",
-  "blockNumber": 26666582,
+  "generatedAt": "2026-05-31T08:04:34.831Z",
+  "blockNumber": 26667024,
   "rowCount": 480,
   "source": "incremental",
   "dataUrl": "https://raw.githubusercontent.com/PerpetualBitcoinDev/PB-hints/main/hints-latest.json.gz",
