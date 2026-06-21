@@ -1,7 +1,7 @@
 {
-  "lastBlock": 26837467,
-  "lastPbtId": 601,
-  "updatedAt": "2026-06-21T01:51:17.621Z",
+  "lastBlock": 26837925,
+  "lastPbtId": 604,
+  "updatedAt": "2026-06-21T03:11:14.919Z",
   "pbts": {
     "1": {
       "nextTriggerPrice": "216026200830401640",
@@ -519,13 +519,13 @@
       "payoutAddress": "0xfe6de5772e048e3b0eac0f5f74aef1d6c52aeb3f"
     },
     "104": {
-      "nextTriggerPrice": "199850190888262500",
-      "pbcLocked": "4477941410336890562880",
+      "nextTriggerPrice": "310866971926688430",
+      "pbcLocked": "2985294273557927041920",
       "payoutAddress": "0xfe6de5772e048e3b0eac0f5f74aef1d6c52aeb3f"
     },
     "105": {
-      "nextTriggerPrice": "200527649162460000",
-      "pbcLocked": "4462813229896563229898",
+      "nextTriggerPrice": "311920758272206530",
+      "pbcLocked": "2975208819931042153266",
       "payoutAddress": "0xfe6de5772e048e3b0eac0f5f74aef1d6c52aeb3f"
     },
     "106": {
@@ -1749,8 +1749,8 @@
       "payoutAddress": "0xfe6de5772e048e3b0eac0f5f74aef1d6c52aeb3f"
     },
     "350": {
-      "nextTriggerPrice": "202663073897213715",
-      "pbcLocked": "3323315603837055624168",
+      "nextTriggerPrice": "315242411447110155",
+      "pbcLocked": "2215543735891370416112",
       "payoutAddress": "0xfe6de5772e048e3b0eac0f5f74aef1d6c52aeb3f"
     },
     "351": {
@@ -3007,6 +3007,21 @@
       "nextTriggerPrice": "307490105756527920",
       "pbcLocked": "242876884338607343216",
       "payoutAddress": "0x369555dd72630c8ce3e85eeeeef709b6e5971dda"
+    },
+    "602": {
+      "nextTriggerPrice": "308614352138884035",
+      "pbcLocked": "1159221243544259331866",
+      "payoutAddress": "0xbad37bea31ad0ac692080ea29b04b23a9ee7b055"
+    },
+    "603": {
+      "nextTriggerPrice": "309177763372095615",
+      "pbcLocked": "1663167255980809683323",
+      "payoutAddress": "0xfe6de5772e048e3b0eac0f5f74aef1d6c52aeb3f"
+    },
+    "604": {
+      "nextTriggerPrice": "310228875485836515",
+      "pbcLocked": "1508333576835272978246",
+      "payoutAddress": "0xfe6de5772e048e3b0eac0f5f74aef1d6c52aeb3f"
     }
   }
 }
