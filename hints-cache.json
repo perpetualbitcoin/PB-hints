@@ -1,7 +1,7 @@
 {
-  "lastBlock": 27015490,
-  "lastPbtId": 673,
-  "updatedAt": "2026-07-12T18:47:56.708Z",
+  "lastBlock": 27015696,
+  "lastPbtId": 674,
+  "updatedAt": "2026-07-12T19:25:06.637Z",
   "pbts": {
     "1": {
       "nextTriggerPrice": "216026200830401640",
@@ -3367,6 +3367,11 @@
       "nextTriggerPrice": "333798271706955015",
       "pbcLocked": "95794701699822266423",
       "payoutAddress": "0xf2c2ba1d56b6fc7a170715ff09ab61b3f589abab"
+    },
+    "674": {
+      "nextTriggerPrice": "328467437719094040",
+      "pbcLocked": "57573912414587402768",
+      "payoutAddress": "0x54bfdb0d268cfc7842ad43892aad70adbd24374c"
     }
   }
 }
