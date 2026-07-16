@@ -62,7 +62,7 @@ async function getChangedIds(vault, fromBlock, toBlock) {
 async function main() {
     console.log('[incremental] Starting incremental scan...');
 
-    const provider = makeProvider();
+    const provider = await makeProvider();
     const vault = new ethers.Contract(VAULT_ADDRESS, VAULT_ABI, provider);
 
     const currentBlock = await provider.getBlockNumber();

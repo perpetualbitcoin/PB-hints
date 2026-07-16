@@ -18,7 +18,7 @@ const {
 async function main() {
     console.log('[full-rescan] Starting full PBt scan from PulseChain...');
 
-    const provider = makeProvider();
+    const provider = await makeProvider();
     const vault = new ethers.Contract(VAULT_ADDRESS, VAULT_ABI, provider);
 
     const currentBlock = await provider.getBlockNumber();

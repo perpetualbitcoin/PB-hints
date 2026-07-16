@@ -29,21 +29,42 @@ const LATEST_META_FILE = path.join(ROOT, 'hints-latest.json');
 const LATEST_GZ_FILE = path.join(ROOT, 'hints-latest.json.gz');
 
 // ── RPC setup with fallback ──
-function makeProvider() {
+// NOTE: `new JsonRpcProvider(url)` never throws synchronously even for a dead
+// endpoint, so we must actually probe each URL (getBlockNumber) before trusting
+// it. First reachable endpoint wins; otherwise we throw with the last error.
+// Public PulseChain endpoints below were verified live; the official
+// rpc.pulsechain.com is kept last as it goes down periodically.
+const PUBLIC_RPCS = [
+    'https://rpc-pulsechain.g4mm4.io',
+    'https://pulsechain-rpc.publicnode.com',
+    'https://rpc.pulsechainstats.com',
+    'https://rpc.pulsechainrpc.com',
+    'https://rpc.degenprotocol.io',
+    'https://rpc.gigatheminter.com',
+    'https://rpc.pulsechain.com',
+];
+
+async function makeProvider() {
     const urls = [
         process.env.RPC_URL,
         process.env.RPC_URL_2,
-        'https://rpc.pulsechain.com',
-        'https://pulsechain.publicnode.com',
+        ...PUBLIC_RPCS,
     ].filter(Boolean);
 
-    // Try each in order, return first successful
+    let lastErr;
     for (const url of urls) {
         try {
-            return new ethers.providers.JsonRpcProvider(url, 369);
-        } catch (_) { /* try next */ }
+            const provider = new ethers.providers.JsonRpcProvider(url, 369);
+            // Probe: confirm the endpoint actually responds before using it.
+            await provider.getBlockNumber();
+            console.log(`[rpc] using ${url}`);
+            return provider;
+        } catch (e) {
+            lastErr = e;
+            console.warn(`[rpc] ${url} unreachable: ${e.message}`);
+        }
     }
-    throw new Error('No RPC URL configured');
+    throw new Error(`No working RPC endpoint. Last error: ${lastErr && lastErr.message}`);
 }
 
 // ── Batch fetch with concurrency ──
@@ -96,8 +117,8 @@ function writeOutput(rows, blockNumber, source) {
         blockNumber,
         rowCount: rows.length,
         source,
-        dataUrl: 'https://raw.githubusercontent.com/PerpetualBitcoinDev/PB-hints/main/hints-latest.json.gz',
-        mirrorUrl: 'https://cdn.jsdelivr.net/gh/PerpetualBitcoinDev/PB-hints@main/hints-latest.json.gz',
+        dataUrl: 'https://raw.githubusercontent.com/perpetualbitcoin/PB-hints/main/hints-latest.json.gz',
+        mirrorUrl: 'https://cdn.jsdelivr.net/gh/perpetualbitcoin/PB-hints@main/hints-latest.json.gz',
     };
     fs.writeFileSync(LATEST_META_FILE, JSON.stringify(meta, null, 2));
 
