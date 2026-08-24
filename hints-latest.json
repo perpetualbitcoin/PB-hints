@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-24T15:14:25.390Z",
-  "blockNumber": 27368373,
-  "rowCount": 739,
+  "generatedAt": "2026-08-24T15:44:59.457Z",
+  "blockNumber": 27368552,
+  "rowCount": 740,
   "source": "incremental",
   "dataUrl": "https://raw.githubusercontent.com/perpetualbitcoin/PB-hints/main/hints-latest.json.gz",
   "mirrorUrl": "https://cdn.jsdelivr.net/gh/perpetualbitcoin/PB-hints@main/hints-latest.json.gz"
